@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>百鲸咨询 - 12年专注企业管理落地陪跑辅导</title>
+  <!-- 引入Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- 引入Font Awesome图标 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- 引入谷歌字体（商务感字体） -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- 自定义配置 -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#F2C94C', // logo黄色（保留品牌识别）
+            secondary: '#1A202C', // 深灰蓝（更商务的主文字色）
+            dark: '#0F172A', // 深蓝黑（背景/强调色）
+            light: '#F8FAFC', // 浅灰蓝（背景色）
+            neutral: '#E2E8F0', // 中性灰（分割线/边框）
+          },
+          fontFamily: {
+            sans: ['Noto Sans SC', 'system-ui', 'sans-serif'], // 优化中文字体
+          },
+          boxShadow: {
+            'elevated': '0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.08)',
+            'hover': '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+          }
+        },
+      }
+    }
+  </script>
+  
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+      .text-shadow {
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      }
+      .nav-active {
+        @apply border-b-2 border-primary text-secondary font-semibold;
+      }
+      .section-divider {
+        @apply w-16 h-1 bg-primary mx-auto my-8;
+      }
+      .card-gradient {
+        background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(248,250,252,1) 100%);
+      }
+    }
+    
+    /* 基础样式 */
+    body {
+      scroll-behavior: smooth;
+      font-family: 'Noto Sans SC', sans-serif;
+      color: theme('colors.secondary');
+      background-color: theme('colors.light');
+    }
+    
+    /* 响应式导航 */
+    .mobile-nav {
+      transform: translateX(100%);
+      transition: transform 0.3s ease-in-out;
+    }
+    
+    .mobile-nav.open {
+      transform: translateX(0);
+    }
+    
+    /* 产品卡片hover效果 */
+    .product-card {
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    
+    .product-card:hover {
+      transform: translateY(-8px);
+      box-shadow: theme('boxShadow.hover');
+    }
+    
+    /* 案例卡片样式 */
+    .case-card {
+      transition: all 0.4s ease;
+    }
+    
+    .case-card:hover {
+      box-shadow: theme('boxShadow.hover');
+    }
+    
+    /* 英雄区背景渐变 */
+    .hero-bg {
+      background: linear-gradient(135deg, theme('colors.light') 0%, theme('colors.white') 100%);
+    }
+    
+    /* 按钮样式优化 */
+    .btn-primary {
+      @apply bg-primary hover:bg-primary/90 text-dark font-semibold py-3 px-6 rounded-md transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5;
+    }
+    
+    .btn-secondary {
+      @apply bg-white hover:bg-neutral text-secondary border border-neutral font-medium py-2 px-5 rounded-md transition-all duration-300;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 导航栏 - 优化为更商务的固定样式 -->
+  <header class="sticky top-0 z-50 bg-white shadow-sm border-b border-neutral/20">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+      <!-- Logo - 优化尺寸和间距 -->
+      <a href="#home" class="flex items-center">
+        <img src="logo.png" alt="百鲸咨询" class="h-14 md:h-16">
+      </a>
+      
+      <!-- PC端导航 - 优化字体和间距 -->
+      <nav class="hidden md:flex items-center space-x-10">
+        <a href="#home" class="nav-active py-2 px-1 text-lg font-medium">首页</a>
+        <a href="#consultants" class="py-2 px-1 text-lg font-medium text-secondary/80 hover:text-primary transition-colors">咨询师及案例</a>
+        <a href="#contact" class="py-2 px-1 text-lg font-medium text-secondary/80 hover:text-primary transition-colors">联系我们</a>
+        <a href="/admin" class="btn-primary">
+          咨询师管理后台
+        </a>
+      </nav>
+      
+      <!-- 移动端菜单按钮 - 优化样式 -->
+      <button id="menuBtn" class="md:hidden text-secondary text-2xl p-2 rounded-full hover:bg-neutral/30 transition-colors">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+    
+    <!-- 移动端导航 - 优化样式 -->
+    <div id="mobileNav" class="mobile-nav fixed top-0 right-0 h-full w-72 bg-white shadow-xl p-8 z-50 border-l border-neutral">
+      <div class="flex justify-between items-center mb-10">
+        <h3 class="text-2xl font-bold text-secondary">百鲸咨询</h3>
+        <button id="closeBtn" class="text-secondary text-xl p-2 rounded-full hover:bg-neutral/30 transition-colors">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <nav class="flex flex-col space-y-8">
+        <a href="#home" class="text-xl font-medium hover:text-primary transition-colors">首页</a>
+        <a href="#consultants" class="text-xl font-medium hover:text-primary transition-colors">咨询师及案例</a>
+        <a href="#contact" class="text-xl font-medium hover:text-primary transition-colors">联系我们</a>
+        <a href="/admin" class="btn-primary text-center">
+          咨询师管理后台
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- 首页/英雄区 - 全面优化视觉层次 -->
+    <section id="home" class="hero-bg py-20 md:py-32">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- 口号 - 优化字体层级和间距 -->
+        <div class="text-center mb-20 max-w-5xl mx-auto">
+          <h1 class="text-[clamp(2.5rem,6vw,4rem)] font-extrabold text-secondary mb-6 text-shadow leading-tight">
+            12年专注企业管理落地陪跑辅导
+          </h1>
+          <p class="text-[clamp(1.25rem,3vw,1.75rem)] text-secondary/80 font-medium mb-8 max-w-3xl mx-auto">
+            帮助企业战略落地利润提升
+          </p>
+          <div class="section-divider"></div>
+        </div>
+        
+        <!-- 公司介绍 - 优化布局和视觉 -->
+        <div class="max-w-4xl mx-auto mb-24">
+          <h2 class="text-3xl md:text-4xl font-bold mb-8 text-center text-secondary">关于百鲸咨询</h2>
+          <div class="bg-white p-10 rounded-xl shadow-elevated card-gradient border border-neutral/20">
+            <p class="text-lg text-secondary/90 leading-relaxed mb-6">
+              百鲸咨询成立于2012年，是一家专注于企业管理落地陪跑辅导的专业咨询机构。12年来，我们深耕企业管理咨询领域，累计服务超过1000家各类企业，涵盖制造、科技、服务、零售等多个行业。
+            </p>
+            <p class="text-lg text-secondary/90 leading-relaxed mb-6">
+              我们摒弃传统咨询"重方案、轻落地"的模式，坚持以结果为导向，为企业提供从战略规划到执行落地的全流程陪跑服务。核心团队均拥有10年以上企业实战管理经验，既懂理论体系，更懂企业实际运营痛点。
+            </p>
+            <p class="text-lg text-secondary/90 leading-relaxed">
+              百鲸咨询始终秉承"专业、落地、共赢"的服务理念，致力于帮助中小企业突破管理瓶颈，实现战略落地和利润持续增长，成为企业可持续发展的长期合作伙伴。
+            </p>
+          </div>
+        </div>
+        
+        <!-- 产品介绍 - 全面优化卡片样式 -->
+        <div class="max-w-7xl mx-auto">
+          <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center text-secondary">核心产品与服务</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- 战略定位 -->
+            <div class="product-card bg-white p-8 rounded-xl shadow-elevated card-gradient border border-neutral/20">
+              <div class="text-primary text-4xl mb-6"><i class="fas fa-compass"></i></div>
+              <h3 class="text-xl font-bold mb-4 text-secondary">战略定位</h3>
+              <p class="text-secondary/80 leading-relaxed">
+                基于行业趋势和企业核心能力，精准定位企业发展方向，制定可落地的战略规划，明确业务边界和增长路径。
+              </p>
+            </div>
+            
+            <!-- 组织优化 -->
+            <div class="product-card bg-white p-8 rounded-xl shadow-elevated card-gradient border border-neutral/20">
+              <div class="text-primary text-4xl mb-6"><i class="fas fa-sitemap"></i></div>
+              <h3 class="text-xl font-bold mb-4 text-secondary">组织优化</h3>
+              <p class="text-secondary/80 leading-relaxed">
+                梳理组织架构，优化管理流程，明确岗位职责，提升组织协同效率，打造适配企业发展的组织能力。
+              </p>
+            </div>
+            
+            <!-- 薪酬管理 -->
+            <div class="product-card bg-white p-8 rounded-xl shadow-elevated card-gradient border border-neutral/20">
+              <div class="text-primary text-4xl mb-6"><i class="fas fa-coins"></i></div>
+              <h3 class="text-xl font-bold mb-4 text-secondary">薪酬管理</h3>
+              <p class="text-secondary/80 leading-relaxed">
+                设计科学合理的薪酬体系，平衡内部公平与外部竞争力，实现薪酬与绩效挂钩，激发员工积极性。
+              </p>
+            </div>
+            
+            <!-- 绩效考核 -->
+            <div class="product-card bg-white p-8 rounded-xl shadow-elevated card-gradient border border-neutral/20">
+              <div class="text-primary text-4xl mb-6"><i class="fas fa-chart-line"></i></div>
+              <h3 class="text-xl font-bold mb-4 text-secondary">绩效考核</h3>
+              <p class="text-secondary/80 leading-relaxed">
+                建立以结果为导向的绩效考核体系，设定可量化的考核指标，实现绩效闭环管理，驱动目标达成。
+              </p>
+            </div>
+            
+            <!-- 股权激励 -->
+            <div class="product-card bg-white p-8 rounded-xl shadow-elevated card-gradient border border-neutral/20">
+              <div class="text-primary text-4xl mb-6"><i class="fas fa-handshake-alt"></i></div>
+              <h3 class="text-xl font-bold mb-4 text-secondary">股权激励</h3>
+              <p class="text-secondary/80 leading-relaxed">
+                设计符合企业发展阶段的股权激励方案，绑定核心人才与企业利益，实现长期激励和人才留存。
+              </p>
+            </div>
+            
+            <!-- 合伙模式 -->
+            <div class="product-card bg-white p-8 rounded-xl shadow-elevated card-gradient border border-neutral/20">
+              <div class="text-primary text-4xl mb-6"><i class="fas fa-users"></i></div>
+              <h3 class="text-xl font-bold mb-4 text-secondary">合伙模式</h3>
+              <p class="text-secondary/80 leading-relaxed">
+                构建灵活的合伙制模式，整合内外部资源，激发组织活力，实现企业与合伙人共同发展。
+              </p>
+            </div>
+            
+            <!-- 人才体系 -->
+            <div class="product-card bg-white p-8 rounded-xl shadow-elevated card-gradient border border-neutral/20">
+              <div class="text-primary text-4xl mb-6"><i class="fas fa-user-tie"></i></div>
+              <h3 class="text-xl font-bold mb-4 text-secondary">人才体系</h3>
+              <p class="text-secondary/80 leading-relaxed">
+                搭建完整的人才选育用留体系，建立人才梯队，提升人才匹配度，为企业发展提供人才保障。
+              </p>
+            </div>
+            
+            <!-- AI应用与数字化 -->
+            <div class="product-card bg-white p-8 rounded-xl shadow-elevated card-gradient border border-neutral/20">
+              <div class="text-primary text-4xl mb-6"><i class="fas fa-robot"></i></div>
+              <h3 class="text-xl font-bold mb-4 text-secondary">AI应用与数字化</h3>
+              <p class="text-secondary/80 leading-relaxed">
+                结合AI技术和数字化工具，优化管理流程，提升决策效率，实现企业管理数字化转型。
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 咨询师及案例 - 优化视觉层次 -->
+    <section id="consultants" class="py-20 md:py-32 bg-white">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center text-secondary">咨询师及案例</h2>
+        <div class="section-divider"></div>
+        
+        <!-- 案例列表 - 优化卡片样式 -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto mt-12">
+          <!-- 咨询师案例1 -->
+          <div class="case-card bg-white rounded-xl overflow-hidden shadow-elevated border border-neutral/20">
+            <img src="https://picsum.photos/800/500?random=1" alt="张咨询师" class="w-full h-56 object-cover">
+            <div class="p-8">
+              <h3 class="text-2xl font-bold mb-2 text-secondary">张XX</h3>
+              <p class="text-primary font-semibold mb-4 text-lg">高级管理咨询师 | 战略落地专家</p>
+              <p class="text-secondary/80 mb-6 line-clamp-3 leading-relaxed">
+                15年企业管理咨询经验，曾服务50+上市公司，擅长战略落地和组织优化，专注制造行业管理升级。
+              </p>
+              <h4 class="font-bold text-secondary mb-3">经典案例：</h4>
+              <p class="text-secondary/80 leading-relaxed">
+                某制造企业战略重构项目：通过重新定位核心业务，优化组织架构，6个月实现利润提升30%，年营收增长25%。
+              </p>
+            </div>
+          </div>
+          
+          <!-- 咨询师案例2 -->
+          <div class="case-card bg-white rounded-xl overflow-hidden shadow-elevated border border-neutral/20">
+            <img src="https://picsum.photos/800/500?random=2" alt="李咨询师" class="w-full h-56 object-cover">
+            <div class="p-8">
+              <h3 class="text-2xl font-bold mb-2 text-secondary">李XX</h3>
+              <p class="text-primary font-semibold mb-4 text-lg">资深人力资源咨询师 | 股权激励专家</p>
+              <p class="text-secondary/80 mb-6 line-clamp-3 leading-relaxed">
+                12年人力资源咨询经验，专注薪酬绩效和股权激励设计，帮助80+企业建立完善的激励体系。
+              </p>
+              <h4 class="font-bold text-secondary mb-3">经典案例：</h4>
+              <p class="text-secondary/80 leading-relaxed">
+                某科技企业股权激励项目：设计动态股权激励方案，绑定核心团队，有效降低人才流失率，研发效率提升40%。
+              </p>
+            </div>
+          </div>
+          
+          <!-- 咨询师案例3 -->
+          <div class="case-card bg-white rounded-xl overflow-hidden shadow-elevated border border-neutral/20">
+            <img src="https://picsum.photos/800/500?random=3" alt="王咨询师" class="w-full h-56 object-cover">
+            <div class="p-8">
+              <h3 class="text-2xl font-bold mb-2 text-secondary">王XX</h3>
+              <p class="text-primary font-semibold mb-4 text-lg">数字化转型咨询师 | AI应用专家</p>
+              <p class="text-secondary/80 mb-6 line-clamp-3 leading-relaxed">
+                10年数字化转型咨询经验，擅长AI技术在企业管理中的应用，帮助传统企业实现数字化升级。
+              </p>
+              <h4 class="font-bold text-secondary mb-3">经典案例：</h4>
+              <p class="text-secondary/80 leading-relaxed">
+                某零售企业数字化升级项目：引入AI数据分析系统，优化供应链管理，库存周转率提升50%，运营成本降低20%。
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 联系我们 - 优化布局和视觉 -->
+    <section id="contact" class="py-20 md:py-32 bg-light">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center text-secondary">联系我们</h2>
+        <div class="section-divider"></div>
+        
+        <div class="max-w-5xl mx-auto bg-white p-10 md:p-12 rounded-xl shadow-elevated card-gradient border border-neutral/20 mt-12">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div>
+              <h3 class="text-2xl font-bold mb-8 flex items-center text-secondary">
+                <i class="fas fa-contact-card text-primary text-3xl mr-4"></i>
+                联系方式
+              </h3>
+              <ul class="space-y-6">
+                <li class="flex items-start">
+                  <i class="fas fa-user text-primary text-2xl mt-1 mr-4 w-6 text-center"></i>
+                  <div>
+                    <span class="font-semibold text-lg text-secondary">联系人：</span>
+                    <span class="text-secondary/80 text-lg">刘老师</span>
+                  </div>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-phone text-primary text-2xl mt-1 mr-4 w-6 text-center"></i>
+                  <div>
+                    <span class="font-semibold text-lg text-secondary">联系电话：</span>
+                    <a href="tel:15158195310" class="text-secondary/80 text-lg hover:text-primary transition-colors">15158195310</a>
+                  </div>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-globe text-primary text-2xl mt-1 mr-4 w-6 text-center"></i>
+                  <div>
+                    <span class="font-semibold text-lg text-secondary">网址：</span>
+                    <a href="http://baijingzixun.top" target="_blank" class="text-secondary/80 text-lg hover:text-primary transition-colors">http://baijingzixun.top</a>
+                  </div>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-envelope text-primary text-2xl mt-1 mr-4 w-6 text-center"></i>
+                  <div>
+                    <span class="font-semibold text-lg text-secondary">邮箱：</span>
+                    <a href="mailto:baijingzixun@hotmail.com" class="text-secondary/80 text-lg hover:text-primary transition-colors">baijingzixun@hotmail.com</a>
+                  </div>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-map-marker-alt text-primary text-2xl mt-1 mr-4 w-6 text-center"></i>
+                  <div>
+                    <span class="font-semibold text-lg text-secondary">地址：</span>
+                    <span class="text-secondary/80 text-lg">浙江省杭州市滨江区西兴街道江陵路2028号星耀城2幢1221室</span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            
+            <div class="flex items-center justify-center">
+              <!-- 地图占位 - 优化样式 -->
+              <div class="w-full h-80 bg-neutral/30 rounded-xl flex items-center justify-center border border-neutral/20 overflow-hidden">
+                <p class="text-secondary/60 text-center">
+                  <i class="fas fa-map-marked-alt text-6xl mb-4 block text-primary/70"></i>
+                  <span class="text-xl font-medium">地图位置</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 页脚 - 优化为商务风格 -->
+  <footer class="bg-dark text-white py-12">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <div class="mb-8 md:mb-0 text-center md:text-left">
+          <p class="text-lg">&copy; 2024 百鲸咨询 版权所有</p>
+          <p class="text-white/60 mt-2">12年专注企业管理落地陪跑辅导</p>
+        </div>
+        
+        <div>
+          <a href="#" class="bg-primary hover:bg-primary/90 text-dark font-semibold py-3 px-8 rounded-md transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 flex items-center text-lg">
+            <i class="fas fa-tools mr-3 text-xl"></i>
+            AI管理小工具（试用）
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    // 移动端导航控制
+    const menuBtn = document.getElementById('menuBtn');
+    const closeBtn = document.getElementById('closeBtn');
+    const mobileNav = document.getElementById('mobileNav');
+    
+    menuBtn.addEventListener('click', () => {
+      mobileNav.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+    
+    closeBtn.addEventListener('click', () => {
+      mobileNav.classList.remove('open');
+      document.body.style.overflow = 'auto';
+    });
+    
+    // 导航链接点击关闭移动端菜单
+    const mobileLinks = mobileNav.querySelectorAll('a');
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileNav.classList.remove('open');
+        document.body.style.overflow = 'auto';
+      });
+    });
+    
+    // 滚动导航高亮
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('nav a');
+    
+    window.addEventListener('scroll', () => {
+      let current = '';
+      
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        
+        if (pageYOffset >= (sectionTop - 150)) {
+          current = section.getAttribute('id');
+        }
+      });
+      
+      navLinks.forEach(link => {
+        link.classList.remove('nav-active');
+        if (link.getAttribute('href') === `#${current}`) {
+          link.classList.add('nav-active');
+        }
+      });
+    });
+    
+    // 平滑滚动
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      });
+    });
+  </script>
+</body>
+</html>
