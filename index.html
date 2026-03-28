@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+  <link rel="icon" href="2025百鲸咨询logo（蓝底金字）.png">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>百鲸咨询 - 12年专注企业管理落地陪跑辅导</title>
+  <title>12年专注企业管理落地陪跑辅导</title>
   <!-- 引入Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- 引入Font Awesome图标 -->
@@ -36,7 +37,7 @@
       }
     }
   </script>
-  
+
   <style type="text/tailwindcss">
     @layer utilities {
       .content-auto {
@@ -108,14 +109,14 @@
     }
   </style>
 </head>
-
 <body>
   <!-- 导航栏 - 优化为更商务的固定样式 -->
   <header class="sticky top-0 z-50 bg-white shadow-sm border-b border-neutral/20">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
       <!-- Logo - 优化尺寸和间距 -->
       <a href="#home" class="flex items-center">
-        <img src="logo.png" alt="百鲸咨询" class="h-14 md:h-16">
+       <img src="2025百鲸咨询logo（蓝底金字）.png" 
+     style="width: 25vw; max-width: 140px; min-width: 80px; height: auto; object-fit: contain;">
       </a>
       
       <!-- PC端导航 - 优化字体和间距 -->
@@ -123,9 +124,7 @@
         <a href="#home" class="nav-active py-2 px-1 text-lg font-medium">首页</a>
         <a href="#consultants" class="py-2 px-1 text-lg font-medium text-secondary/80 hover:text-primary transition-colors">咨询师及案例</a>
         <a href="#contact" class="py-2 px-1 text-lg font-medium text-secondary/80 hover:text-primary transition-colors">联系我们</a>
-        <a href="/admin" class="btn-primary">
-          咨询师管理后台
-        </a>
+        <a href="login.html" class="btn-primary">咨询师管理后台</a>
       </nav>
       
       <!-- 移动端菜单按钮 - 优化样式 -->
@@ -146,13 +145,10 @@
         <a href="#home" class="text-xl font-medium hover:text-primary transition-colors">首页</a>
         <a href="#consultants" class="text-xl font-medium hover:text-primary transition-colors">咨询师及案例</a>
         <a href="#contact" class="text-xl font-medium hover:text-primary transition-colors">联系我们</a>
-        <a href="/admin" class="btn-primary text-center">
-          咨询师管理后台
-        </a>
+        <a href="login.html" class="btn-primary text-center">咨询师管理后台</a>
       </nav>
     </div>
   </header>
-
   <main>
     <!-- 首页/英雄区 - 全面优化视觉层次 -->
     <section id="home" class="hero-bg py-20 md:py-32">
@@ -173,7 +169,7 @@
           <h2 class="text-3xl md:text-4xl font-bold mb-8 text-center text-secondary">关于百鲸咨询</h2>
           <div class="bg-white p-10 rounded-xl shadow-elevated card-gradient border border-neutral/20">
             <p class="text-lg text-secondary/90 leading-relaxed mb-6">
-              百鲸咨询成立于2012年，是一家专注于企业管理落地陪跑辅导的专业咨询机构。12年来，我们深耕企业管理咨询领域，累计服务超过1000家各类企业，涵盖制造、科技、服务、零售等多个行业。
+              百鲸咨询是一家专注于企业管理落地陪跑辅导的专业咨询机构。12年来，我们深耕企业管理咨询领域，累计服务超过1000家各类企业，涵盖制造、科技、服务、零售等多个行业。
             </p>
             <p class="text-lg text-secondary/90 leading-relaxed mb-6">
               我们摒弃传统咨询"重方案、轻落地"的模式，坚持以结果为导向，为企业提供从战略规划到执行落地的全流程陪跑服务。核心团队均拥有10年以上企业实战管理经验，既懂理论体系，更懂企业实际运营痛点。
@@ -263,7 +259,6 @@
         </div>
       </div>
     </section>
-
     <!-- 咨询师及案例 - 优化视觉层次 -->
     <section id="consultants" class="py-20 md:py-32 bg-white">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -272,29 +267,29 @@
         
         <!-- 案例列表 - 优化卡片样式 -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto mt-12">
-          <!-- 咨询师案例1 -->
-          <div class="case-card bg-white rounded-xl overflow-hidden shadow-elevated border border-neutral/20">
-            <img src="https://picsum.photos/800/500?random=1" alt="张咨询师" class="w-full h-56 object-cover">
-            <div class="p-8">
-              <h3 class="text-2xl font-bold mb-2 text-secondary">张XX</h3>
-              <p class="text-primary font-semibold mb-4 text-lg">高级管理咨询师 | 战略落地专家</p>
-              <p class="text-secondary/80 mb-6 line-clamp-3 leading-relaxed">
-                15年企业管理咨询经验，曾服务50+上市公司，擅长战略落地和组织优化，专注制造行业管理升级。
+      <!-- 咨询师案例1 -->
+<div class="case-card bg-white rounded-xl overflow-hidden shadow-elevated border border-neutral/20 h-[400px]">
+  <img class="你把 img 标签的 class 改成 “w-full h-48 object-contain bg-white mx-auto block" src="刘诠案老师.jpg" alt="刘诠案">
+  <div class="p-8 mt-4 h-48 overflow-hidden">
+    <h3 style="width: 80px; margin: 0 auto; text-align: center;">刘诠案</h3>
+  <p class="text-primary font-semibold mb-4 text-lg text-center">CE咨询辅导师 | 绩效股权落地专家</p>
+              <p class="text-secondary/80 mb-6 line- leading-relaxed">
+                12年企业管理咨询经验，曾服务200+公司，擅长战略管理、薪酬绩效、股权激励，专注企业改革管理升级。
               </p>
               <h4 class="font-bold text-secondary mb-3">经典案例：</h4>
               <p class="text-secondary/80 leading-relaxed">
-                某制造企业战略重构项目：通过重新定位核心业务，优化组织架构，6个月实现利润提升30%，年营收增长25%。
+                某控股集团项目：通过全案咨询确定战略目标，优化组织架构，导入股权激励，实现人效提升30%，年营收增长翻番。
               </p>
             </div>
           </div>
           
           <!-- 咨询师案例2 -->
-          <div class="case-card bg-white rounded-xl overflow-hidden shadow-elevated border border-neutral/20">
-            <img src="https://picsum.photos/800/500?random=2" alt="李咨询师" class="w-full h-56 object-cover">
-            <div class="p-8">
-              <h3 class="text-2xl font-bold mb-2 text-secondary">李XX</h3>
+          <div class="case-card bg-white rounded-xl overflow-hidden shadow-elevated border border-neutral/20" h-[400px]>
+            <img  class="h-1/2 object-cover src="https://picsum.photos/800/500?random=2" alt="李咨询师" class="w-full h-full object-cover">
+            <div class="p-8 mt-4 h-48 overflow-hidden>
+              <h3 style="width: 60px; margin: 0 auto; text-align: center;">刘老师</h3>
               <p class="text-primary font-semibold mb-4 text-lg">资深人力资源咨询师 | 股权激励专家</p>
-              <p class="text-secondary/80 mb-6 line-clamp-3 leading-relaxed">
+              <p class="text-secondary/80 mb-6 line- leading-relaxed">
                 12年人力资源咨询经验，专注薪酬绩效和股权激励设计，帮助80+企业建立完善的激励体系。
               </p>
               <h4 class="font-bold text-secondary mb-3">经典案例：</h4>
@@ -305,12 +300,12 @@
           </div>
           
           <!-- 咨询师案例3 -->
-          <div class="case-card bg-white rounded-xl overflow-hidden shadow-elevated border border-neutral/20">
-            <img src="https://picsum.photos/800/500?random=3" alt="王咨询师" class="w-full h-56 object-cover">
-            <div class="p-8">
-              <h3 class="text-2xl font-bold mb-2 text-secondary">王XX</h3>
+          <div class="case-card bg-white rounded-xl overflow-hidden shadow-elevated border border-neutral/20" h-[400px]>
+            <img  class="h-1/2 object-cover src="https://picsum.photos/800/500?random=3" alt="王咨询师" class="w-full h-full object-cover">
+            <div class="p-8 mt-4 h-48 overflow-hidden">
+             <h3 style="width: 60px; margin: 0 auto; text-align: center;">刘老师</h3>
               <p class="text-primary font-semibold mb-4 text-lg">数字化转型咨询师 | AI应用专家</p>
-              <p class="text-secondary/80 mb-6 line-clamp-3 leading-relaxed">
+              <p class="text-secondary/80 mb-6 line- leading-relaxed">
                 10年数字化转型咨询经验，擅长AI技术在企业管理中的应用，帮助传统企业实现数字化升级。
               </p>
               <h4 class="font-bold text-secondary mb-3">经典案例：</h4>
@@ -322,7 +317,6 @@
         </div>
       </div>
     </section>
-
     <!-- 联系我们 - 优化布局和视觉 -->
     <section id="contact" class="py-20 md:py-32 bg-light">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -389,26 +383,51 @@
       </div>
     </section>
   </main>
-
   <!-- 页脚 - 优化为商务风格 -->
   <footer class="bg-dark text-white py-12">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col md:flex-row justify-between items-center">
-        <div class="mb-8 md:mb-0 text-center md:text-left">
-          <p class="text-lg">&copy; 2024 百鲸咨询 版权所有</p>
-          <p class="text-white/60 mt-2">12年专注企业管理落地陪跑辅导</p>
-        </div>
-        
-        <div>
-          <a href="#" class="bg-primary hover:bg-primary/90 text-dark font-semibold py-3 px-8 rounded-md transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 flex items-center text-lg">
-            <i class="fas fa-tools mr-3 text-xl"></i>
-            AI管理小工具（试用）
-          </a>
-        </div>
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col md:flex-row justify-between items-center">
+      <div class="mb-8 md:mb-0 text-center md:text-left">
+        <p class="text-white/60 mt-2">帮助企业战略落地实现利润增长</p>
+        <p class="text-white/60 mt-2">浙ICP备2023042992号</p>
+        <p class="text-lg">&copy; 百鲸咨询 版权所有</p>
       </div>
-    </div>
-  </footer>
+      
+      <!-- 修复后的AI工具按钮区域：单按钮+展开列表，无嵌套错误 -->
+<div style="text-align: right;">
+  <!-- 黄色主按钮 -->
+  <button style="
+    background: #f7c530;
+    color: #000;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    display: inline-block;
+  " onclick="document.getElementById('toolList').style.display = document.getElementById('toolList').style.display === 'none' ? 'block' : 'none'">
+    ⚙️ AI管理小工具（试用）
+  </button>
 
+  <!-- 展开的工具列表：恢复深色背景，和页脚保持一致 -->
+  <div id="toolList" style=text-align:center;"
+    display: none;
+   style="margin-top:5px; position:absolute; left:0; background:rgba(0,0,0,0.8); text-align:center;"
+    background: #0f172a; /* 和页脚一致的深蓝色背景 */
+    padding: 12px;
+    border-radius: 8px;
+    min-width: 220px;
+    display: inline-block;
+  ">
+    <div style="margin: 8px 0;"><a href="目标测算工具.html" style="color: #fff; text-decoration: none;">目标测算工具</a></div>
+    <div style="margin: 8px 0;"><a href="战略解码工具.html" style="color: #fff; text-decoration: none;">战略解码工具</a></div>
+    <div style="margin: 8px 0;"><a href="组织架构生成工具.html" style="color: #fff; text-decoration: none;">组织架构生成工具</a></div>
+    <div style="margin: 8px 0;"><a href="股权架构生成工具.html" style="color: #fff; text-decoration: none;">股权架构生成工具</a></div>
+  </div>
+</div>
+    </div>
+  </div>
+</footer>
   <!-- JavaScript -->
   <script>
     // 移动端导航控制
