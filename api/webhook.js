@@ -1,31 +1,23 @@
 import express from 'express';
 const app = express();
 
-// 必须先解析 JSON 格式的请求体（抖音校验是 POST JSON）
+// 必须解析 JSON 格式请求体（抖音校验是 POST JSON）
 app.use(express.json());
 
-// 抖音 Webhook 校验接口（严格匹配抖音要求）
+// 抖音 Webhook 校验接口（路径必须是 /api/webhook）
 app.post('/api/webhook', (req, res) => {
-  // 抖音校验时，challenge 一定在 req.body 里
   const challenge = req.body.challenge;
-  
   if (challenge) {
-    // 关键：设置纯文本响应头，直接返回 challenge 字符串
+    // 关键：返回纯文本，不能有任何额外内容
     res.setHeader('Content-Type', 'text/plain');
     return res.send(challenge);
-  } else {
-    return res.status(400).send('缺少 challenge 参数');
   }
+  res.status(400).send('missing challenge');
 });
 
-// 健康检查接口（用于测试服务是否可用）
-app.get('/api/health', (req, res) => {
-  res.send('ok');
-});
+// 健康检查（用于测试服务是否存活）
+app.get('/api/health', (req, res) => res.send('ok'));
 
 const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log(`服务运行在端口 ${port}`);
-});
-
+app.listen(port, () => console.log(`Running on port ${port}`));
 export default app;
