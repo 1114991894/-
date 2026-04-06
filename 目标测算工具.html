@@ -263,60 +263,6 @@
         }
     });
 
-    // 导出Excel功能
-    document.getElementById('exportExcel').addEventListener('click', function() {
-        // 获取所有输入值
-        const baodi = parseFloat(baodiInput.value) || 0;
-        const fixedCost = parseFloat(fixedCostInput.value) || 0;
-        const naturalGrowth = parseFloat(naturalGrowthInput.value) || 0;
-        const marketGrowth = parseFloat(marketGrowthInput.value) || 0;
-        const inflation = parseFloat(inflationInput.value) || 0;
-        const inflationProofRate = parseFloat(inflationProofRateInput.value) || 0;
-        const shareholder = parseFloat(shareholderInput.value) || 0;
-        
-        // 获取计算结果
-        const revenueTarget = baodi * (1 + naturalGrowth/100 + shareholder/100);
-        const costBase = baodi - fixedCost;
-        const costGrowthFactor = 1 + marketGrowth/100 + inflation/100 + inflationProofRate/100;
-        const variableCost = costBase * costGrowthFactor;
-        const costTarget = fixedCost + variableCost;
-        const profitTarget = revenueTarget - costTarget;
-        const profitMargin = revenueTarget !== 0 ? (profitTarget / revenueTarget) * 100 : 0;
-        
-        // 创建工作簿
-        const wb = XLSX.utils.book_new();
-        
-        // 创建输入数据工作表
-        const inputData = [
-            ['参数', '数值', '单位'],
-            ['保底值', baodi, '万元'],
-            ['固定成本', fixedCost, '万元'],
-            ['自然增长率', naturalGrowth, '%'],
-            ['市场增长率', marketGrowth, '%'],
-            ['通货膨胀率', inflation, '%'],
-            ['保值率', inflationProofRate, '%'],
-            ['股东期望值', shareholder, '%']
-        ];
-        const wsInput = XLSX.utils.aoa_to_sheet(inputData);
-        
-        // 创建结果数据工作表
-        const resultData = [
-            ['目标类型', '数值', '单位'],
-            ['营业目标', revenueTarget.toFixed(2), '万元'],
-            ['成本目标', costTarget.toFixed(2), '万元'],
-            ['利润目标', profitTarget.toFixed(2), '万元'],
-            ['利润率', profitMargin.toFixed(2), '%']
-        ];
-        const wsResult = XLSX.utils.aoa_to_sheet(resultData);
-        
-        // 添加工作表到工作簿
-        XLSX.utils.book_append_sheet(wb, wsInput, '输入参数');
-        XLSX.utils.book_append_sheet(wb, wsResult, '计算结果');
-        
-        // 生成Excel文件并下载
-        XLSX.writeFile(wb, '公司目标测算结果.xlsx');
-    });
-</script>
 
 </body>
 </html>
